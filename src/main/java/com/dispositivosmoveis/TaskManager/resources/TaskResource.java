@@ -5,10 +5,7 @@ import com.dispositivosmoveis.TaskManager.resources.dtos.TaskDTO;
 import com.dispositivosmoveis.TaskManager.services.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -28,5 +25,12 @@ public class TaskResource {
         if(taskOp.isPresent())
             return ResponseEntity.ok(TaskDTO.fromEntity(taskOp.get()));
         return ResponseEntity.notFound().build();
+    }
+
+    @PostMapping
+    public ResponseEntity<TaskDTO> save (@RequestBody TaskDTO taskDTO ){
+        Task task = this.taskService.save(TaskDTO.fromDTO(taskDTO));
+
+        return ResponseEntity.ok(TaskDTO.fromEntity(task));
     }
 }
