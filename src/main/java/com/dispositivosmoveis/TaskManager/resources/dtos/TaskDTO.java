@@ -5,14 +5,14 @@ import com.dispositivosmoveis.TaskManager.domain.entities.TaskPriority;
 import com.dispositivosmoveis.TaskManager.domain.entities.TaskStatus;
 
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public record TaskDTO(Long id,
                       String title,
                       String description,
-                      Date creationDate,
-                      Date completionDate,
-                      Date dueDate,
+                      LocalDateTime creationDate,
+                      LocalDateTime completionDate,
+                      LocalDateTime dueDate,
                       TaskPriority priority,
                       TaskStatus status
 ) {
@@ -29,14 +29,15 @@ public record TaskDTO(Long id,
                 entity.getStatus()
         );
     }
+    
         public static Task fromDTO( TaskDTO dto ){
             return Task.builder()
                     .id(dto.id)
                     .title(dto.title)
                     .description(dto.description)
-                    .completionDate((java.sql.Date) dto.completionDate)
-                    .dueDate((java.sql.Date) dto.dueDate)
-                    .creationDate((java.sql.Date) dto.creationDate)
+                    .completionDate(dto.completionDate)
+                    .dueDate(dto.dueDate)
+                    .creationDate(dto.creationDate)
                     .priority(dto.priority)
                     .status(dto.status)
                     .build();

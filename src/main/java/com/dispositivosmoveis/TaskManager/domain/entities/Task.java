@@ -3,9 +3,11 @@ package com.dispositivosmoveis.TaskManager.domain.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "TASKS")
 @NoArgsConstructor
@@ -26,13 +28,13 @@ public class Task {
     private @Getter @Setter String description;
 
     @Column(name = "CREATION_DATE", nullable = false)
-    private @Getter @Setter Date creationDate;
+    private @Getter @Setter LocalDateTime creationDate;
 
     @Column(name = "COMPLETION_DATE", nullable = true)
-    private @Getter @Setter Date completionDate;
+    private @Getter @Setter LocalDateTime completionDate;
 
     @Column(name = "DUE_DATE", nullable = true)
-    private @Getter @Setter Date dueDate;
+    private @Getter @Setter LocalDateTime dueDate;
 
     private transient String inutil;
 
