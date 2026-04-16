@@ -23,10 +23,10 @@ public class TaskRepositoryCustomImpl implements TaskRepositoryCustom{
     public List<Task> findByTitleCriteria(String title){
 
         CriteriaBuilder Builder = this.entityManager.getCriteriaBuilder();
-        CriteriaQuery<Task> query = builder.createQuery(Task.class);
+        CriteriaQuery<Task> query = Builder.createQuery(Task.class);
         Root<Task> root = query.from(Task.class);
 
-        query.select(root).where(builder.equal(root.get("title"), title));
+        query.select(root).where(Builder.equal(root.get("title"), title));
 
         return this.entityManager.createQuery(query).getResultList();
 
@@ -35,15 +35,15 @@ public class TaskRepositoryCustomImpl implements TaskRepositoryCustom{
     public List<Task> findAdvancedCriteria(TaskStatus status, TaskPriority priority, Date startDate, Date endDate){
 
         CriteriaBuilder Builder = this.entityManager.getCriteriaBuilder();
-        CriteriaQuery<Task> query = builder.createQuery(Task.class);
+        CriteriaQuery<Task> query = Builder.createQuery(Task.class);
         Root<Task> root = query.from(Task.class);
 
-        Predicate p1 = builder.equal(root.get("title"), title);
-        Predicate p2 = builder.equal(root.get("title"), title);
-        Predicate p3 = builder.equal(root.get("title"), title);
-        Predicate p4 = builder.equal(root.get("title"), title);
+        Predicate p1 = Builder.equal(root.get("status"), status);
+        Predicate p2 = Builder.equal(root.get("priority"), priority);
+        Predicate p3 = Builder.equal(root.get("startDate"), startDate);
+        Predicate p4 = Builder.equal(root.get("endDate"), endDate);
 
-        query.select(root).where(titulo);
+        query.select(root).where(Builder.and(p1, p2, p3, p4));
 
         return this.entityManager.createQuery(query).getResultList();
 
